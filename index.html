@@ -113,16 +113,14 @@
                 <option value="ground">Ground</option>
                 <!-- Add more types as needed -->
             </select>
-            <button onclick="fetchPokemons()">Filter</button>
+            <button onclick="handleFilter()">Filter</button>
         </div>
         <div id="pokemonList" class="loading">Loading Pokémon...</div>
     </div>
     <script>
 const apiUrl = 'https://subarna00-pokemon.hf.space/api/v1/pokemons/all';
 
-async function fetchPokemons() {
-    const nameFilter = document.getElementById('searchName').value.trim();
-    const typeFilter = document.getElementById('filterType').value.trim();
+async function fetchPokemons(nameFilter = '', typeFilter = '') {
     const url = new URL(apiUrl);
 
     // Append search parameters if provided
@@ -166,9 +164,15 @@ function displayPokemons(pokemons) {
     });
 }
 
-// Initial load
-fetchPokemons();
+// Function to handle filter button click
+function handleFilter() {
+    const nameFilter = document.getElementById('searchName').value.trim();
+    const typeFilter = document.getElementById('filterType').value.trim();
+    fetchPokemons(nameFilter, typeFilter);
+}
 
+// Initial load
+fetchPokemons(); // Fetch all Pokémon initially
     </script>
 </body>
 </html>
